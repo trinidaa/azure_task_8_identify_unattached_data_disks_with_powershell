@@ -14,10 +14,10 @@ $allDisks = Get-AzDisk -ResourceGroupName $resourceGroupName
 $unattachedDisks = $allDisks | Where-Object { $_.ManagedBy -eq $null }
 
 if ($unattachedDisks) {
-    Write-Host "foond unattached disks in '$resourceGroupName':" -ForegroundColor Yellow
+    Write-Host "found unattached disks in '$resourceGroupName':" -ForegroundColor Yellow
     $unattachedDisks | Select-Object Name, DiskSizeGB, Sku, DiskState | Format-Table -AutoSize
 } else {
-    Write-Host "В '$resourceGroupName' has no unattached disks." -ForegroundColor Green
+    Write-Host "In '$resourceGroupName' has no unattached disks." -ForegroundColor Green
 }
 
 $unattachedDisks | ConvertTo-Json | Out-File -FilePath "$PWD\result.json" -Encoding utf8
